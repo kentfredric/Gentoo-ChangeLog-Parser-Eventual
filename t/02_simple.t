@@ -4,7 +4,7 @@ use warnings;
 
 use Test::More 0.96;
 
-use Gentoo::ChangeLog::Parser::Eventual;
+use Gentoo::ChangeLog::Parser::Eventual::Simple;
 
 use Path::Class qw( file );
 use FindBin;
@@ -31,26 +31,10 @@ for my $file ( sort keys %testmap ) {
 
   my @content = $parse->file($file)->slurp( chomp => 1 );
 
-  my @events;
-
-  my $instance = Gentoo::ChangeLog::Parser::Eventual->new(
-    callback => sub {
-      my ( $self, $name, $opts ) = @_;
-      # print "$name : "  . $opts->{content} . "\n";
-      push @events, [ $name, $opts ];
-    }
-  );
-
-  my $i = 0;
-
-  for (@content) {
-    $instance->handle_line( $_, { line => $i } );
-    $i++;
-  }
-
+  my $arrayerf = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines( \@content );
   #$instance->parse_lines(@content);
 
-  #note explain \@events;
+  #note explain $arrayerf;
 
   pass("$file parses");
 }

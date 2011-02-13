@@ -98,6 +98,7 @@ package Gentoo::ChangeLog::Parser::Eventual;
     return 'next' if $_->{WORKLINE} !~ /^\*/;
     if ( $_->context eq 'changebody' ) {
       $_->handle_event( 'end_change_body' => $_->_event_data() );
+      $_->context('body');
     }
 
     $_->handle_event( 'release_line' => $_->_event_data() );
@@ -120,6 +121,10 @@ package Gentoo::ChangeLog::Parser::Eventual;
       unless ( $_->context() eq 'body' )
       or ( $_->context() eq 'changebody' );
     return 'next' if ( $_->{WORKLINE} !~ /^[ ]{2}\d\d?[ ][A-Z][a-z]+[ ]\d\d+;.*$/ );
+     if ( $_->context eq 'changebody' ) {
+      $_->handle_event( 'end_change_body' => $_->_event_data() );
+    }
+
     $_->handle_event( 'begin_change_header' => $_->_event_data() );
     $_->context("changeheader");
     return 'return';
