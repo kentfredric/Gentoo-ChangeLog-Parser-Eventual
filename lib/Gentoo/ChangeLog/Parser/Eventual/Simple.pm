@@ -10,6 +10,24 @@ package Gentoo::ChangeLog::Parser::Eventual::Simple;
   use Moose;
   use namespace::clean -except => 'meta';
 
+=head1 SYNOPSIS
+
+    use Gentoo::ChangeLog::Parser::Eventual::Simple;
+    use Path::Class qw( file );
+
+    my $arrayRef = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines(
+        file("some_file")->slurp( chomp => 1 )
+    );
+
+=cut
+
+=head1 DESCRIPTION
+
+This is a very simple consumer of L<< C<Gentoo::ChangeLog::Parser::Eventual>|Gentoo::ChangeLog::Parser::Eventual >>
+that uses the events to accumulate an array of hash objects describing the source document.
+
+=cut
+
   has '_parser' => (
     isa     => 'Object',
     is      => 'rw',
@@ -31,6 +49,20 @@ package Gentoo::ChangeLog::Parser::Eventual::Simple;
     lazy    => 1,
     default => sub { croak('NOT REALLY AUTOMATIC, need to specify _callback') },
   );
+
+=method parse_lines
+
+=head3 Specification: $arrayref = $class->parse_lines( @list_of_lines )
+
+Each line should be pre-chomped.
+
+=head3 Example:
+
+    my $arrayRef = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines(
+        file("some_file")->slurp( chomp => 1 )
+    );
+
+=cut
 
   sub parse_lines {
     my ( $class, $lines ) = @_;
