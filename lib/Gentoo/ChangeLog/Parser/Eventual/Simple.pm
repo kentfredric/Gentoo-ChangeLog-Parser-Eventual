@@ -10,7 +10,7 @@ package Gentoo::ChangeLog::Parser::Eventual::Simple;
   use Moose;
   use namespace::clean -except => 'meta';
 
-  has 'parser' => (
+  has '_parser' => (
     isa     => 'Object',
     is      => 'rw',
     lazy    => 1,
@@ -109,7 +109,7 @@ package Gentoo::ChangeLog::Parser::Eventual::Simple;
     my $i = 0;
 
     for my $line ( @{$lines} ) {
-      $instance->parser->handle_line( $line, { line => $i } );
+      $instance->_parser->handle_line( $line, { line => $i } );
       $i++;
     }
     if ( exists $stash{header} ) {
