@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::ChangeLog::Parser::Eventual;
 
-# ABSTRACT: Event-Based ChangeLog format parser, inspired by Pod::Eventual.
+# ABSTRACT: Rudimentary Event-Based ChangeLog format parser, inspired by Pod::Eventual.
 
 =head1 SYNOPSIS
 
