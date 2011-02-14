@@ -72,11 +72,13 @@ This is the part after the header.
 =cut
 
 {
+  use Carp qw( croak );
   use Moose;
+  use namespace::clean -except => 'meta';
 
-  has _context => ( isa => 'Str', is => 'rw', default => 'pre-parse' );
+  has _context => ( isa => 'Str', is => 'rw', default => 'pre-parse', );
 
-  has _event_register => ( isa => 'ArrayRef[ CodeRef ]', is => 'rw', lazy_build => 1 );
+  has _event_register => ( isa => 'ArrayRef[ CodeRef ]', is => 'rw', lazy_build => 1, );
 
 =attr _callback
 
@@ -113,13 +115,14 @@ an unsupported event name will result in casualties.
 =cut
 
   has _callback => (
-    isa        => 'CodeRef',
-    init_arg   => 'callback',
-    is         => 'rw',
-    required   => 1,
+    isa      => 'CodeRef',
+    init_arg => 'callback',
+    is       => 'rw',
+    required => 1,
+
     #  lazy_build => 1,
-    traits     => ['Code'],
-    'handles'  => { handle_event => 'execute_method', }
+    traits    => ['Code'],
+    'handles' => { handle_event => 'execute_method', },
   );
 
   sub _event_data {
@@ -155,12 +158,12 @@ and then in the callback:
 
 =cut
 
-
   sub handle_line {
     my ( $self, $line, $passthrough ) = @_;
 
     $passthrough ||= {};
 
+    ## no critic ( ProhibitLocalVars )
     local $self->{WORKLINE}    = $line;
     local $self->{PASSTHROUGH} = $passthrough;
 
@@ -172,8 +175,9 @@ and then in the callback:
       next RULE if $result eq 'next';
       return    if $result eq 'fail';
       return 1  if $result eq 'return';
-      die "Bad return $result\n";
+      croak(qq{Bad return $result});
     }
+    return;
   }
 
   sub _build__event_register {
@@ -186,7 +190,7 @@ and then in the callback:
   }
 
   sub _build_callback {
-    die "Not implementeted!. For now you MUST specify callback yourself";
+    croak(q{Not implementeted!. For now you MUST specify callback yourself});
   }
 
 =event start
@@ -264,7 +268,7 @@ Fires in the event no processing rules indicated a success state.
   );
 
   before handle_event => sub {
-    die "BAD EVENT $_[1]" if not exists $EVENT_LIST{ $_[1] };
+    croak("BAD EVENT $_[1]") if not exists $EVENT_LIST{ $_[1] };
   };
 
   sub _event_start {
@@ -335,7 +339,7 @@ Fires in the event no processing rules indicated a success state.
     }
 
     $_->handle_event( 'begin_change_header' => $_->_event_data() );
-    $_->_context("changeheader");
+    $_->_context('changeheader');
     return 'return';
   }
 
@@ -367,6 +371,7 @@ Fires in the event no processing rules indicated a success state.
   }
   __PACKAGE__->meta->make_immutable;
 
+  no Moose;
 }
 
 1;
