@@ -4,7 +4,7 @@ use warnings;
 
 package Gentoo::ChangeLog::Parser::Eventual::Simple;
 
-# ABSTRACT: A very crude Changelog -> Graph translation.
+# ABSTRACT: A very crude ChangeLog -> Graph translation.
 {
   use Carp qw( croak );
   use Moose;

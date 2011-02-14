@@ -22,11 +22,11 @@ package Gentoo::ChangeLog::Parser::Eventual;
 
 In the proceeds of making a ChangeLog parser, I kept getting stuck on various parts with writing it cleanly.
 
-This design, inspired by L<Pod::Eventual>, greatly simplifies the process by using very rudimentary and loose
+This design, inspired by L<< RJBS' Great C<Pod::Eventual>|Pod::Eventual >>, greatly simplifies the process by using very rudimentary and loose
 data validation.
 
-Lines are fed in manually, because we didn't want to implement all the File IO ourself and didn't want to
-limit the interface by forcing passing a filehandle.
+Lines are fed in manually, because we didn't want to implement all the File IO our self and didn't want to
+limit the interface by forcing passing a file handle.
 
 You can do the IO quite simply anyway.
 
@@ -43,11 +43,11 @@ Currently, it can only detect a few basic things.
 
 =item 1. Header blocks.
 
-We go naive and classify that entire "# ChangeLog for " section at the top of a Changelog as a "Header".
+We go naive and classify that entire "# ChangeLog for " section at the top of a ChangeLog as a "Header".
 
 The header itself is not validated or parsed in any way beyond the notion that its a series of comments.
 
-=item 2. Release staments.
+=item 2. Release statements.
 
 Raises an event when it sees
 
@@ -55,13 +55,13 @@ Raises an event when it sees
 
 =item 3. Change Headers.
 
-This is the part on the top of each changelog entry as follows:
+This is the part on the top of each ChangeLog entry as follows:
 
     10 Jun 2010; Bob Smith <asd>:
 
 There are multiple ways this can be done however, so there are 3 events for this.
 
-=item 4. Changelog bodies.
+=item 4. Change bodies.
 
 This is the part after the header.
 
@@ -105,7 +105,7 @@ from L</handle_line>, but it injects its own 'content' key containing a copy of 
 
 =head3 Executing.
 
-You can manually execute the coderef as if it were called internally, but there is little point to this.
+You can manually execute the CodeRef as if it were called internally, but there is little point to this.
 
     $object->handle_event( 'an-event-name' => { } );
 
@@ -145,7 +145,7 @@ However, its not guaranteed to work, and is not tested for, and may in a future 
 
 =head3 Parameter: $opts : Mandatory, HashRef
 
-This is a hashreference of data to be sent through to the event handler.
+This is a HashRef of data to be sent through to the event handler.
 
 This is a good place to specify the source line number of the line you are currently parsing if you want that.
 
@@ -199,7 +199,7 @@ Fires when the first line is parsed.
 
 =event blank
 
-Fires on blank ( ie: all whitespace ) lines.
+Fires on blank ( i.e.: all white space ) lines.
 
 =event header
 
