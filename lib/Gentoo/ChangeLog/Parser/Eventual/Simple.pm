@@ -3,6 +3,9 @@ use strict;
 use warnings;
 
 package Gentoo::ChangeLog::Parser::Eventual::Simple;
+BEGIN {
+  $Gentoo::ChangeLog::Parser::Eventual::Simple::VERSION = '0.1.0';
+}
 
 # ABSTRACT: A very crude ChangeLog -> Graph translation.
 {
@@ -10,23 +13,7 @@ package Gentoo::ChangeLog::Parser::Eventual::Simple;
   use Moose;
   use namespace::clean -except => 'meta';
 
-=head1 SYNOPSIS
 
-    use Gentoo::ChangeLog::Parser::Eventual::Simple;
-    use Path::Class qw( file );
-
-    my $arrayRef = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines(
-        file("some_file")->slurp( chomp => 1 )
-    );
-
-=cut
-
-=head1 DESCRIPTION
-
-This is a very simple consumer of L<< C<Gentoo::ChangeLog::Parser::Eventual>|Gentoo::ChangeLog::Parser::Eventual >>
-that uses the events to accumulate an array of hash objects describing the source document.
-
-=cut
 
   has '_parser' => (
     isa     => 'Object',
@@ -50,19 +37,6 @@ that uses the events to accumulate an array of hash objects describing the sourc
     default => sub { croak('NOT REALLY AUTOMATIC, need to specify _callback') },
   );
 
-=method parse_lines
-
-=head3 Specification: $arrayref = $class->parse_lines( @list_of_lines )
-
-Each line should be pre-chomped.
-
-=head3 Example:
-
-    my $arrayRef = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines(
-        file("some_file")->slurp( chomp => 1 )
-    );
-
-=cut
 
   sub parse_lines {
     my ( $class, $lines ) = @_;
@@ -163,4 +137,57 @@ Each line should be pre-chomped.
   no Moose;
 }
 1;
+
+
+__END__
+=pod
+
+=head1 NAME
+
+Gentoo::ChangeLog::Parser::Eventual::Simple - A very crude ChangeLog -> Graph translation.
+
+=head1 VERSION
+
+version 0.1.0
+
+=head1 SYNOPSIS
+
+    use Gentoo::ChangeLog::Parser::Eventual::Simple;
+    use Path::Class qw( file );
+
+    my $arrayRef = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines(
+        file("some_file")->slurp( chomp => 1 )
+    );
+
+=head1 DESCRIPTION
+
+This is a very simple consumer of L<< C<Gentoo::ChangeLog::Parser::Eventual>|Gentoo::ChangeLog::Parser::Eventual >>
+that uses the events to accumulate an array of hash objects describing the source document.
+
+=head1 METHODS
+
+=head2 parse_lines
+
+=head3 Specification: $arrayref = $class->parse_lines( @list_of_lines )
+
+Each line should be pre-chomped.
+
+=head3 Example:
+
+    my $arrayRef = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines(
+        file("some_file")->slurp( chomp => 1 )
+    );
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
 
