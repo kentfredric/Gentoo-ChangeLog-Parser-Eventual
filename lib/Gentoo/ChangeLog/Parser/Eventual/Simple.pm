@@ -4,7 +4,10 @@ use warnings;
 
 package Gentoo::ChangeLog::Parser::Eventual::Simple;
 BEGIN {
-  $Gentoo::ChangeLog::Parser::Eventual::Simple::VERSION = '0.1.0';
+  $Gentoo::ChangeLog::Parser::Eventual::Simple::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Gentoo::ChangeLog::Parser::Eventual::Simple::VERSION = '0.1.1';
 }
 
 # ABSTRACT: A very crude ChangeLog -> Graph translation.
@@ -148,7 +151,7 @@ Gentoo::ChangeLog::Parser::Eventual::Simple - A very crude ChangeLog -> Graph tr
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 
@@ -184,7 +187,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
