@@ -1,7 +1,9 @@
 Release history for Gentoo-ChangeLog-Parser-Eventual
 
 {{$NEXT}}
-- Maintenance release for Module::Build 0.4004
+
+0.1.2 2013-04-06T05:35:40Z
+ - Maintenance release for Module::Build 0.4004
 
  [Dependencies::Added / develop requires]
  - Pod::Coverage::TrustPod
