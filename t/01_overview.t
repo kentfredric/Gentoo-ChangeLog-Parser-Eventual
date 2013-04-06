@@ -36,6 +36,7 @@ for my $file ( sort keys %testmap ) {
   my $instance = Gentoo::ChangeLog::Parser::Eventual->new(
     callback => sub {
       my ( $self, $name, $opts ) = @_;
+
       # print "$name : "  . $opts->{content} . "\n";
       push @events, [ $name, $opts ];
     }

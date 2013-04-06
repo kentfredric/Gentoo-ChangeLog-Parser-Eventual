@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::ChangeLog::Parser::Eventual::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::ChangeLog::Parser::Eventual::VERSION = '0.1.1';
+  $Gentoo::ChangeLog::Parser::Eventual::VERSION = '0.1.2';
 }
 
 # ABSTRACT: Rudimentary Event-Based ChangeLog format parser, inspired by Pod::Eventual.
@@ -206,6 +206,7 @@ BEGIN {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -214,7 +215,7 @@ Gentoo::ChangeLog::Parser::Eventual - Rudimentary Event-Based ChangeLog format p
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 SYNOPSIS
 
@@ -400,10 +401,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
