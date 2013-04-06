@@ -32,6 +32,7 @@ for my $file ( sort keys %testmap ) {
   my @content = $parse->file($file)->slurp( chomp => 1 );
 
   my $arrayerf = Gentoo::ChangeLog::Parser::Eventual::Simple->parse_lines( \@content );
+
   #$instance->parse_lines(@content);
 
   #note explain $arrayerf;
